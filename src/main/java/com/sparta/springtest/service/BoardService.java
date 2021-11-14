@@ -22,20 +22,5 @@ public class BoardService {
         return boardRepository.save(boardDto.toEntity()).getId();
     }
 
-    @Transactional
-    public List<BoardDto> getBoardList() {
-        List<Board> boardList = boardRepository.findAll();
-        List<BoardDto> boardDtoList = new ArrayList<>();
 
-        for(Board board : boardList) {
-            BoardDto boardDto = BoardDto.builder()
-                    .id(board.getId())
-
-                    .title(board.getTitle())
-
-                    .build();
-            boardDtoList.add(boardDto);
-        }
-        return boardDtoList;
-    }
 }

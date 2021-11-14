@@ -64,11 +64,9 @@
         <p class="lead">이번주 문제는 매우 쉬워요!!</p>
         <hr class="my-4">
 
-        <p id="acticle" >
-
-                <p text="${post.title}"></p>
-            </a>
-        </p>
+        {{#articles}}
+            <p>{{title}}</p> <!-- title 출력 -->
+        {{/articles}}
     </div>
     <form action="/post" method="post">
     <div class="form-group">
@@ -77,7 +75,7 @@
         <textarea class="form-control" id="Title" rows="3"></textarea>
     </div>
 
-        <input type="submit" id="submit" value="저장" class="btn">
+        <button type="submit" value="저장" class="btn">저장</button>
     </form>
 
 </div>
