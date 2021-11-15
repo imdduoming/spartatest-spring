@@ -11,33 +11,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+
 @Controller
 public class Boardcontroller {
-    @Autowired
-    private BoardRepository boardRepository;
-    @Autowired
     private BoardService boardService;
 
-
-    @PostMapping("/post")
-    public Long create(@RequestBody BoardDto boardDto) {
-        boardService.savePost()
+    public Boardcontroller(BoardService boardService) {
+        this.boardService = boardService;
     }
-    // 리파지터리 객체 자동 삽입 됨! 위에서 @RequiredArgsConstructor 했음!
 
-    @GetMapping("/articles")
-    public String index(Model model) { // 뷰 페이지로 데이터 전달을 위한 Model 객체 자동 삽입 됨!
-        // 모든 Article을 가져옴
-        // Iterable 인터페이스는 ArrayList의 부모 인터페이스
-        Iterable<Board> boardList = boardRepository.findAll();
-        // 뷰 페이지로 articles 전달!
-        model.addAttribute("arti", boardList);
-        // 뷰 페이지 설정
+    @GetMapping("/")
+    public String list(Model model) {
+        List<BoardDto> boardDtoList = boardService.getBoardList();
+        model.addAttribute("postList", boardDtoList);
         return "index";
     }
+
+    @GetMapping("/post")
+    public String post() {
+        return "index";
+    }
+
+    @PostMapping("/post")
+    public String write(BoardDto boardDto) {
+        boardService.savePost(boardDto);
+        return "redirect:/";
+    }
+
 }
