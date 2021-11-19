@@ -5,40 +5,30 @@ import com.sparta.springtest.dto.BoardDto;
 import com.sparta.springtest.repository.BoardRepository;
 
 import com.sparta.springtest.service.BoardService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@Controller
+@RequiredArgsConstructor
+@RestController
 public class Boardcontroller {
-    private BoardService boardService;
 
-    public Boardcontroller(BoardService boardService) {
-        this.boardService = boardService;
+    private final BoardService boardService;
+
+    @PostMapping("/article")
+    public Board setBoard(@RequestBody BoardDto boardDto){
+
+        return boardService.setBoard(boardDto);
     }
 
-    @GetMapping("/")
-    public String list(Model model) {
-        List<BoardDto> boardDtoList = boardService.getBoardList();
-        model.addAttribute("postList", boardDtoList);
-        return "index";
-    }
+    @GetMapping("/article/{id}")
+    public Board getBoard(@PathVariable Long id){
 
-    @GetMapping("/post")
-    public String post() {
-        return "index";
+        return boardService.getBoard(id);
     }
-
-    @PostMapping("/post")
-    public String write(BoardDto boardDto) {
-        boardService.savePost(boardDto);
-        return "redirect:/";
-    }
-
 }
