@@ -1,6 +1,7 @@
 package com.sparta.springtest.domain.entity;
 
 import com.sparta.springtest.domain.Timestamped;
+import com.sparta.springtest.dto.BoardDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,15 @@ public class Board extends Timestamped {
 
     // 반드시 값을 가지도록 합니다.
     @Column(nullable = false)
+    private String title;
+
+    @Column
     private String content;
+
+    // 반드시 값을 가지도록 합니다.
+    @Column
+    private int commentNum;
+
 
 
 }

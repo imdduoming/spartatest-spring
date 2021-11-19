@@ -16,14 +16,22 @@ public class BoardService {
 
     public Board setBoard(BoardDto boardDto){
         Board board = new Board();
+        board.setTitle(boardDto.getTitle());
         board.setContent(boardDto.getContent());
         boardRepository.save(board);
         return board;
     }
 
     public Board getBoard(Long id){
+
         return boardRepository.findById(id).get();
+
     }
+
+
+
+
+
 
 
 

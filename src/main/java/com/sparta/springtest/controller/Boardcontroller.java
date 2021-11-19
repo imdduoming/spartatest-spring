@@ -19,6 +19,7 @@ import java.util.List;
 public class Boardcontroller {
 
     private final BoardService boardService;
+    private final BoardRepository boardRepository;
 
     @PostMapping("/article")
     public Board setBoard(@RequestBody BoardDto boardDto){
@@ -26,9 +27,15 @@ public class Boardcontroller {
         return boardService.setBoard(boardDto);
     }
 
+    @GetMapping("/article")
+    public List<Board> getBoards() {
+        return boardRepository.findAll();
+    }
     @GetMapping("/article/{id}")
-    public Board getBoard(@PathVariable Long id){
+    public Board getBoard(Long id){
 
         return boardService.getBoard(id);
     }
+
+
 }

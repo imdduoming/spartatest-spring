@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class BoardDto {
-
+    private String title;
     private String content;
 
 
