@@ -51,6 +51,9 @@
         }
     </style>
     <script>
+        $(document).ready(function () {
+            readArticles();
+        });
         function postingArticle() {
             $.ajax({
                 type: "POST",
@@ -60,7 +63,7 @@
                 success: function (response) {
                     $("#content").val('');
                     if(confirm("저장된 메시지를 확인하시겠어요?")) {
-                        readArticles()
+                        window.location.reload()
                     }
                 }
             })
@@ -69,7 +72,7 @@
         function readArticles() {
             $.ajax({
                 type: "GET",
-                url: `/article`,
+                url: `/articles`,
 
                 success: function (response) {
                     console.log(response);
@@ -81,7 +84,7 @@
                         let created = response[i]['createdAt']
                         let new_content = `<tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col"><a href='view.html?title='+${title}+'&content='+${content}'>${title}</a></th>
+                                                <th scope="col"><a href="/view?id=${id}">${title}</a></th>
                                                 <th scope="col">${commentNum}</th>
                                                 <th scope="col">${created}</th>
                                           </tr>`

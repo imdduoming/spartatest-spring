@@ -2,13 +2,12 @@ package com.sparta.springtest.domain.entity;
 
 import com.sparta.springtest.domain.Timestamped;
 import com.sparta.springtest.dto.BoardDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-
+import java.util.List;
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter // get 함수를 일괄적으로 만들어줍니다.
 @Entity // DB 테이블 역할을 합니다.
@@ -26,9 +25,9 @@ public class Board extends Timestamped {
     @Column
     private String content;
 
-    // 반드시 값을 가지도록 합니다.
-    @Column
-    private int commentNum;
+    @OneToMany(mappedBy="board")
+    private List<Comment> comments;
+
 
 
 

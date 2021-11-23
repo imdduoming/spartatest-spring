@@ -1,6 +1,7 @@
 package com.sparta.springtest.controller;
 
 import com.sparta.springtest.domain.entity.Board;
+import com.sparta.springtest.dto.BoardCommentDto;
 import com.sparta.springtest.dto.BoardDto;
 import com.sparta.springtest.repository.BoardRepository;
 
@@ -27,15 +28,19 @@ public class Boardcontroller {
         return boardService.setBoard(boardDto);
     }
 
-    @GetMapping("/article")
+    @GetMapping("/articles")
     public List<Board> getBoards() {
         return boardRepository.findAll();
     }
+
     @GetMapping("/article/{id}")
-    public Board getBoard(Long id){
+    public Board getBoard(@PathVariable Long id){
 
         return boardService.getBoard(id);
     }
-
+    @PostMapping("/article/comment")
+    public void setArticleComment(@RequestBody BoardCommentDto boardCommentDto){
+        boardService.setArticleComment(boardCommentDto);
+    }
 
 }
