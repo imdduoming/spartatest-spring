@@ -5,7 +5,8 @@ import com.sparta.springtest.dto.BoardDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -27,6 +28,16 @@ public class Board extends Timestamped {
 
     @OneToMany(mappedBy="board")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy="board")
+    private List<Tag> tags;
+
+    public Board(BoardDto boardDto) {
+        this.id=boardDto.getId();
+        this.title=boardDto.getTitle();
+        this.content=boardDto.getContent();
+        this.tags=new ArrayList<>();
+    }
 
 
 
